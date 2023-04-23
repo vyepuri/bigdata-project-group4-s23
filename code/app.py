@@ -28,7 +28,7 @@ cursor = conn.cursor()
 cursor.execute('SELECT * FROM sales')
 result_set = cursor.fetchall()
 # Create Pandas DataFrame from result set
-df = pd.DataFrame(result_set, columns=[col[0] for col in cursor.description])
+df = pd.DataFrame(result_set[1:], columns=[col[0] for col in cursor.description])
 # Close Hive connection
 conn.close()
 
