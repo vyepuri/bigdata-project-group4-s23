@@ -15,11 +15,25 @@ import plotly.figure_factory as ff
 import scipy.stats as stats
 from scipy.stats import norm
 from scipy.stats import probplot
+from pyhive import hive
+
 
 app = Flask(__name__)
 
-# Load the data
-df = pd.read_csv("https://raw.githubusercontent.com/sushantag9/Supermarket-Sales-Data-Analysis/master/supermarket_sales%20-%20Sheet1.csv")
+
+# Connect to Hive server
+conn = hive.connect(host='localhost', port=10000, database='default')
+# Execute Hive query and fetch results
+cursor = conn.cursor()
+cursor.execute('SELECT * FROM sales')
+result_set = cursor.fetchall()
+# Create Pandas DataFrame from result set
+df = pd.DataFrame(result_set, columns=[col[0] for col in cursor.description])
+# Close Hive connection
+conn.close()
+
+# Load the data from csv
+#df = pd.read_csv("sales.csv")
 
 def generate_url(fig):
     buffer = io.BytesIO()
