@@ -57,6 +57,11 @@ hive>> LOAD DATA LOCAL INPATH '/root/bigdata-project-group5-s23/dataset/sales.cs
 hive>> select * from sales;
 ```
 
+#### Come out of hive shell
+```sh
+hive>> exit;
+```
+
 <br/><br/>
 
 
