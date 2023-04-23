@@ -54,7 +54,7 @@ hive>> LOAD DATA LOCAL INPATH '/root/bigdata-project-group5-s23/dataset/sales.cs
 
 #### Query the data and verify
 ```sh
-hive>> select * from tables;
+hive>> select * from sales;
 ```
 
 <br/><br/>
@@ -64,6 +64,14 @@ hive>> select * from tables;
 
 ### Step 2 : *Run the interactive Visualizer application*
 
+#### Setup libraries
+```sh
+pip3 install flask, plotly
+sudo apt install unixodbc-dev
+sudo apt-get install libsasl2-dev
+pip3 install sasl
+```
+
 #### Run the application
 ```sh
 >> cd /root/bigdata-project-group5-s23/code
@@ -71,7 +79,7 @@ hive>> select * from tables;
 ```
 
 
-#### Access the application on browser with <ip>:5000
+#### Access the application on browser with ip:5000
 
   
   <br/><br/>
