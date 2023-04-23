@@ -49,7 +49,7 @@ hive>> show tables;
 ```
 #### Load csv data into hive table
 ```sh
-hive>> LOAD DATA LOCAL INPATH '/root/bigdata-project-group5-s23/dataset' OVERWRITE INTO TABLE sales;
+hive>> LOAD DATA LOCAL INPATH '/root/bigdata-project-group5-s23/dataset/sales.csv' OVERWRITE INTO TABLE sales;
 ```
 
 #### Query the data and verify
