@@ -71,10 +71,10 @@ hive>> exit;
 
 #### Setup libraries
 ```sh
-pip3 install flask, plotly
-sudo apt install unixodbc-dev
-sudo apt-get install libsasl2-dev
-pip3 install sasl
+>> pip3 install flask, plotly
+>> sudo apt install unixodbc-dev
+>> sudo apt-get install libsasl2-dev
+>> pip3 install sasl
 ```
 
 #### Run the application
