@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data Visualizations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+		.navbar {
+			background-color: #000;
+		}
+		.navbar-brand {
+			color: #fff !important;
+			font-weight: bold;
+			font-size: 24px;
+			text-align: center;
+			width: 100%;
+		}
+	</style>
+    
+</head>
+<body>
+   
+  
+            <nav class="navbar navbar-expand-md navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand" href="#">Group 4 - Interactive Visualizer</a>
+                </div>
+            </nav>
+
+     <div class="container-fluid">  
+            <div>
+                <br><br>		
+                <p>Select Dataset: </p>
+                <select id="dataset">
+                    <option value="sales">Supermarket Sales</option>
+                </select>
+                <br><br>
+                <p>Select a visualization type and input the necessary fields:</p>
+                <select id="vis-type">
+                    <option selected="true" disabled="disabled">--Select Visualization Type---</option> 
+                    <option value="scatter">Scatter Plot</option>
+                    <option value="line">Line Plot</option>
+                    <option value="bar">Bar Plot</option>
+                    <option value="count">Count Plot</option>
+                    <option value="box">Box Plot</option>
+                    <option value="probability">Probability Plot</option>
+                    <option value="pie">Pie Chart</option>
+                    <option value="heatmap">Heat Map</option>
+                    <option value="distribution">Distribution</option>
+                    <option value="distribution-matrix">Distribution Plot Matrix</option>
+                </select>
+                <br><br>
+            </div>
+
+            <div id="scatter-div">
+                Choose X Column:        
+                <select id="scatter-x-col" name="scatter-x-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                Choose Y Column:
+                <select id="scatter-y-col" name="scatter-y-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br> <br>
+                <button id="scatter-plot-button" class="btn btn-primary">Generate Scatter Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="line-div">
+                Choose X Column:
+                <select id="line-x-col" name="line-x-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                Choose Y Column:
+                <select id="line-y-col" name="line-y-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br> <br>
+                <button id="line-plot-button" class="btn btn-primary">Generate Line Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="bar-div">
+                Choose X Column:
+                <select id="bar-x-col" name="bar-x-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                Choose Y Column:
+                <select id="bar-y-col" name="bar-y-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br> <br>
+                <button id="bar-plot-button" class="btn btn-primary">Generate Bar Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="box-div">
+                Choose X Column:
+                <select id="box-x-col" name="box-x-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+                Choose Y Column:
+                <select id="box-y-col" name="box-y-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+                <br> <br>
+                <button id="box-plot-button" class="btn btn-primary">Generate Box Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="count-div">
+                Choose a Column:        
+                <select id="count-col" name="count-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>        
+                <br> <br>
+                <button id="count-plot-button" class="btn btn-primary">Generate Count Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="heatmap-div">
+                Choose Color Scale:
+                <select id="heatmap-colorscale" name="heatmap-colorscale">
+                <option value="Greys">Greys</option>
+                <option value="YlGnBu">YlGnBu</option>
+                <option value="Greens">Greens</option>
+                <option value="Oranges">Oranges</option>
+                <option value="YlOrRd">YlOrRd</option>
+                <option value="Bluered">Bluered</option>
+                <option value="RdBu">RdBu</option>
+                <option value="Blues">Blues</option>
+                <option value="Picnic">Picnic</option>
+                <option value="Rainbow">Rainbow</option>
+                <option value="Portland">Portland</option>
+                <option value="Jet">Jet</option>
+                <option value="Hot">Hot</option>
+                <option value="Blackbody">Blackbody</option>
+                <option value="Earth">Earth</option>
+                <option value="Electric">Electric</option>
+                <option value="Viridis">Viridis</option>
+                <option value="Cividis">Cividis</option>
+                </select>                 
+                <br> <br>
+                <button id="heatmap-button" class="btn btn-primary">Generate Heat Map</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="probability-div">
+                Choose a Column:        
+                <select id="probability-col" name="probability-col">
+                    {% for column in numeric_cols %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>        
+                <br> <br>
+                <button id="probability-plot-button" class="btn btn-primary">Generate Probability Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="pie-div">
+                Choose a Column:        
+                <select id="pie-col" name="pie-col">
+                    {% for column in columns %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>        
+                <br> <br>
+                <button id="pie-chart-button" class="btn btn-primary">Generate Pie Chart</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="distribution-div">
+                Choose a Column:        
+                <select id="distribution-col" name="distribution-col">
+                    {% for column in numeric_cols %}
+                    <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>        
+                <br> <br>
+                <button id="distribution-plot-button" class="btn btn-primary">Generate Distribution Plot</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="distribution-matrix-div">            
+                <button id="distribution-matrix-plot-button" class="btn btn-primary">Generate Distribution Matrix</button>
+                <button class="btn btn-danger clear">Clear</button>
+            </div>
+
+            <div id="plot-container"></div>
+     </div>
+
+	<script>
+        function hideAll(){
+            $("#scatter-div").hide();
+            $("#line-div").hide();
+            $("#bar-div").hide();
+            $("#count-div").hide();
+            $("#box-div").hide();
+            $("#heatmap-div").hide();
+            $("#distribution-div").hide();
+            $("#pie-div").hide();
+            $("#probability-div").hide();
+            $("#distribution-matrix-div").hide();
+        }
+		$(document).ready(function() {
+
+            hideAll();            
+
+			$("#vis-type").change(function() {
+
+                hideAll();
+				var visType = $(this).val();
+
+				if (visType == "scatter") 
+                    $("#scatter-div").show();
+                if (visType == "line") 
+                   $("#line-div").show();
+                if (visType == "bar")
+                   $("#bar-div").show();
+                if (visType == "count")
+                   $("#count-div").show();
+                if (visType == "box") 
+                   $("#box-div").show();
+                if (visType == "heatmap")
+                   $("#heatmap-div").show(); 
+                if (visType == "probability")
+                   $("#probability-div").show();
+                if (visType == "pie")
+                   $("#pie-div").show();  
+                if (visType == "distribution")
+                   $("#distribution-div").show();                        
+                if (visType == "distribution-matrix")
+                   $("#distribution-matrix-div").show();
+
+			});
+           
+             
+			$("#scatter-plot-button").click(function() {				
+					var xCol = $("#scatter-x-col").val();
+					var yCol = $("#scatter-y-col").val();
+					$.post("/scatter", {"x-col": xCol, "y-col": yCol}, function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			}); 
+
+            $("#line-plot-button").click(function() {				
+					var xCol = $("#line-x-col").val();
+					var yCol = $("#line-y-col").val();
+					$.post("/line", {"x-col": xCol, "y-col": yCol}, function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			}); 
+
+            $("#bar-plot-button").click(function() {				
+					var xCol = $("#bar-x-col").val();
+					var yCol = $("#bar-y-col").val();
+					$.post("/bar", {"x-col": xCol, "y-col": yCol}, function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			}); 
+            $("#box-plot-button").click(function() {				
+					var xCol = $("#box-x-col").val();
+					var yCol = $("#box-y-col").val();
+					$.post("/box", {"x-col": xCol, "y-col": yCol}, function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			}); 
+            $("#count-plot-button").click(function() {				
+					var col = $("#count-col").val();					
+					$.post("/count", {"col": col}, function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			}); 
+            $("#heatmap-button").click(function() {		
+                var colorScale = $("#heatmap-colorscale").val();					
+					$.post("/heatmap", {"colorScale" : colorScale },function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			});
+            $("#heatmap-button").click(function() {		
+                var colorScale = $("#heatmap-colorscale").val();					
+					$.post("/heatmap", {"colorScale" : colorScale },function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			});
+            $("#pie-chart-button").click(function() {		
+                var col = $("#pie-col").val();					
+					$.post("/pie", {"col" : col },function(data) {
+						//$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+                        $("#plot-container").html(data.plot_url);
+					});			
+			});
+            $("#probability-plot-button").click(function() {	
+                   var col = $("#probability-col").val();			
+					$.post("/probability", {"col": col},function(data) {
+                        $("#plot-container").html(data.plot_url);						
+					});			
+			}); 
+            $("#distribution-plot-button").click(function() {	
+                   var col = $("#distribution-col").val();			
+					$.post("/distribution", {"col": col},function(data) {
+                        $("#plot-container").html(data.plot_url);						
+					});			
+			}); 
+
+            $("#distribution-matrix-plot-button").click(function() {				
+					$.post("/distribution-matrix", function(data) {
+						$("#plot-container").html(`<img src="data:image/png;base64,${data.plot_url}">`);
+					});			
+			}); 
+
+            $(".clear").click(function() {
+                $("#plot-container").html("");
+            });
+
+
+
+
+		}); // end of document ready
+	</script>
+
+</body>
+</html>
