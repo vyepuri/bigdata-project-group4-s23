@@ -9,7 +9,7 @@
 #### After logging in, clone the code and requred files
 ```sh
 >> cd ~
->> git clone https://github.com/vyepuri/bigdata-project-group5-s23.git
+>> git clone https://github.com/vyepuri/bigdata-project-group4-s23.git
 ```
 
 #### Connect to hive
@@ -49,7 +49,7 @@ hive>> show tables;
 ```
 #### Load csv data into hive table
 ```sh
-hive>> LOAD DATA LOCAL INPATH '/root/bigdata-project-group5-s23/dataset/sales.csv' OVERWRITE INTO TABLE sales;
+hive>> LOAD DATA LOCAL INPATH '/root/bigdata-project-group4-s23/dataset/sales.csv' OVERWRITE INTO TABLE sales;
 ```
 
 #### Query the data and verify
@@ -79,7 +79,7 @@ hive>> exit;
 
 #### Run the application
 ```sh
->> cd /root/bigdata-project-group5-s23/code
+>> cd /root/bigdata-project-group4-s23/code
 >> python app.py
 ```
 
